@@ -1,0 +1,61 @@
+---
+title: "[Digital Forensic] NONamed_길에서 주어온 만두"
+date: 2021-07-15T04:53:38+09:00
+categories:
+- Digital Forensic
+- NONamed
+tags:
+- DF
+keywords:
+- tech
+#thumbnailImage: //example.com/image.jpg
+---
+
+<!--more-->
+
+![Problem](https://github.com/RoomRooms/blog/blob/master/img/Digital%20Forensic/NONamed/magicIMAGE/problem.PNG?raw=true "문제")
+
+NONamed_길에서 주어온 만두 문제는 위와 같다.  
+제공된 파일을 먼저 다운로드했다.  
+
+![zip](https://github.com/RoomRooms/blog/blob/master/img/Digital%20Forensic/NONamed/magicIMAGE/problem.PNG?raw=true "zip")
+
+이번 과제에서 처음으로 정상적인 zip 파일이다!!  
+big.png와 readme.txt로 구성되어 있다.  
+
+![big](https://github.com/RoomRooms/blog/blob/master/img/Digital%20Forensic/NONamed/magicIMAGE/problem.PNG?raw=true "big.png")
+
+readme.txt에는 아래와 같이 문제의 힌트가 적혀 있다.  
+
+![readme.txt](https://github.com/RoomRooms/blog/blob/master/img/Digital%20Forensic/NONamed/magicIMAGE/problem.PNG?raw=true "readme.txt")
+
+passwd가 필요한 것으로 봐서 openstego나 steghide같다.  
+passwd를 알아내기 위해 먼저 Ubuntu에서 Strings 명령어를 통해  
+파일 내의 문자열을 출력했다.
+
+![str1](https://github.com/RoomRooms/blog/blob/master/img/Digital%20Forensic/NONamed/magicIMAGE/problem.PNG?raw=true "str1")
+
+![str2](https://github.com/RoomRooms/blog/blob/master/img/Digital%20Forensic/NONamed/magicIMAGE/problem.PNG?raw=true "str2")
+
+사실 Strings 명령어로 passwd를 알아낼 수 있으리라 생각하지 않았어서  
+많이 당황했다.  
+
+먼저 아까 예상한 Steghide를 통해 복호화를 시도했다.  
+
+![steghide](https://github.com/RoomRooms/blog/blob/master/img/Digital%20Forensic/NONamed/magicIMAGE/problem.PNG?raw=true "steghide")
+
+실패!  
+다음은 Openstego를 통해 복호화를 시도했다.  
+
+![openstego](https://github.com/RoomRooms/blog/blob/master/img/Digital%20Forensic/NONamed/magicIMAGE/problem.PNG?raw=true "openstego")
+
+성공했다!  
+medium.png를 추출해냈다.  
+
+![medium](https://github.com/RoomRooms/blog/blob/master/img/Digital%20Forensic/NONamed/magicIMAGE/problem.PNG?raw=true "medium")
+
+
+
+
+\[출처\]  
+- NONamed : http://ctf.no-named.kr:1234/
