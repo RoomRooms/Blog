@@ -54,7 +54,26 @@ medium.png를 추출해냈다.
 
 ![medium](https://github.com/RoomRooms/blog/blob/master/img/Digital%20Forensic/NONamed/NONamed_%EA%B8%B8%EC%97%90%EC%84%9C%20%EC%A3%BC%EC%96%B4%EC%98%A8%20%EB%A7%8C%EB%91%90/medium.png?raw=true "medium")
 
+----
+여기서부터는 다른 사이트를 참조했습니다.  
+\[참조\] : https://yysecurity.tistory.com/208  
+---
 
+사실 medium.png에서 pass가 달라지는 줄 알고 RGBA 값이랑 Exif 등등.. 다양한 방식으로 분석했다.  
+문제는 가장 근본적인 생각을 못했다는 점이다.  
+pass가 동일하다...  
+
+![openstego](https://github.com/RoomRooms/blog/blob/master/img/Digital%20Forensic/NONamed/NONamed_%EA%B8%B8%EC%97%90%EC%84%9C%20%EC%A3%BC%EC%96%B4%EC%98%A8%20%EB%A7%8C%EB%91%90/openstego2.PNG?raw=true "openstego")
+
+![small](https://github.com/RoomRooms/blog/blob/master/img/Digital%20Forensic/NONamed/NONamed_%EA%B8%B8%EC%97%90%EC%84%9C%20%EC%A3%BC%EC%96%B4%EC%98%A8%20%EB%A7%8C%EB%91%90/small.png?raw=true "small")
+
+이렇게 small.png를 추출해내고  
+
+![openstego](https://github.com/RoomRooms/blog/blob/master/img/Digital%20Forensic/NONamed/NONamed_%EA%B8%B8%EC%97%90%EC%84%9C%20%EC%A3%BC%EC%96%B4%EC%98%A8%20%EB%A7%8C%EB%91%90/openstego3.png?raw=true "medium")
+
+똑같이 flag.txt를 추출해낼 수 있다...  
+
+![flag](https://github.com/RoomRooms/blog/blob/master/img/Digital%20Forensic/NONamed/NONamed_%EA%B8%B8%EC%97%90%EC%84%9C%20%EC%A3%BC%EC%96%B4%EC%98%A8%20%EB%A7%8C%EB%91%90/flag.png?raw=true "medium")
 
 
 \[출처\]  
