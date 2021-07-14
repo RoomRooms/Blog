@@ -30,4 +30,5 @@ Foremost 도구를 사용하여 monitor.jpg 안에 존재하는 모든 파일을
 ![output](https://github.com/RoomRooms/blog/blob/master/img/Digital%20Forensic/Suninatas/21/output.PNG?raw=true "foremost output")  
 위와 같이 monitor.jpg 내에 숨어 있는 다량의 이미지 파일들을 추출하여 Flag 값을 알 수 있다.
 
-\[출처\] : [Suninatas]("http://suninatas.com/")
+\[출처\]  
+- Suninatas : http://suninatas.com/

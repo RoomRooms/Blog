@@ -36,4 +36,5 @@ mandu.png는 "89 50 4E 47 0E 0B 1F 0B"인 것을 확인할 수 있다.
 그 결과 위와 같이 Flag 값을 얻을 수 있다.  
 Flag 값은 직접 찾아보세요!
 
-\[출처\] : [NONamed]("http://ctf.no-named.kr:1234/")
+\[출처\]  
+- NONamed : http://ctf.no-named.kr:1234/
