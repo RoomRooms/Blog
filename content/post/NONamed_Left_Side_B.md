@@ -43,7 +43,7 @@ Hex 값을 보다 보면 FF or FE로 LSB가 1씩 차이난다.
 이런 LSB 값만을 추출하기 위해서  
 파이썬으로 코드를 작성했다.  
 
-![py](https://https://github.com/RoomRooms/blog/blob/master/img/Digital%20Forensic/NONamed/NONamed_Left%20Side%20B/py.PNG?raw=true "py")
+![py](https://github.com/RoomRooms/blog/blob/master/img/Digital%20Forensic/NONamed/NONamed_Left%20Side%20B/py.PNG?raw=true "py")
 
 py 파일은 str.txt를 한 줄씩 읽어서 각 줄에 해당되는 각 값의 LSB 값만을 추출한다.  
 그렇게 추출된 값을 8bit씩 조합한다. 조합한 값은 10진수로 변환되며,   
