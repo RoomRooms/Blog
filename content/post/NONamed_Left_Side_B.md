@@ -51,7 +51,7 @@ py 파일은 str.txt를 한 줄씩 읽어서 각 줄에 해당되는 각 값의 
 
 파이썬 코드를 실행시켜보면 Flag 값을 얻을 수 있다.
 
-![flag](https://github.com/RoomRooms/blog/blob/master/img/Digital%20Forensic/NONamed/NONamed_Left%20Side%20B/flag.PNG?raw=true "flag")
+![flag](https://github.com/RoomRooms/blog/blob/master/img/Digital%20Forensic/NONamed/NONamed_Left%20Side%20B/flag.png?raw=true "flag")
 
 \[출처\]  
 - NONamed : http://ctf.no-named.kr:1234/
