@@ -29,6 +29,6 @@ keywords:
 가장 선명한 1024는 아무 썸네일도 없었다..  
 그 다음인 256을 열어보았다!!  
 
-![Thum](https://raw.githubusercontent.com/RoomRooms/blog/master/img/Digital%20Forensic/NONamed/NONamed_Us_memory/Flag.PNG)
+![Thum](https://raw.githubusercontent.com/RoomRooms/blog/master/img/Digital%20Forensic/NONamed/NONamed_Us_memory/Flag.jpg)
 
 Flag 발견!!
