@@ -13,7 +13,7 @@ keywords:
 
 <!--more-->
 
-![Problem] ()
+![Problem] (https://raw.githubusercontent.com/RoomRooms/blog/master/img/Digital%20Forensic/NONamed/NONamed_Company3/Problem.PNG)
 
 이번 포스팅에서 해결할 문제다!!!  
 동거자의 이름과 계정 삭제된 시각을 알아내야 한다!  
@@ -27,24 +27,24 @@ keywords:
 해당 글은 이벤트 로그에서 사용자 계정 삭제에 대한 설명을 해주고 있다.  
 이 지식을 활용하기 위해서 먼저 문제 파일에서 이벤트 로그를 추출해내야 한다.  
 
-![logs]()
+![logs](https://raw.githubusercontent.com/RoomRooms/blog/master/img/Digital%20Forensic/NONamed/NONamed_Company3/logs.PNG)
 
 이벤트 로그가 저장되어 있는 곳은 \"\%systemroot\%system32\winevt\Logs\"에 있다.  
 보안 로그는 사용자 계정이 생성되고 삭제되는 기록이 있다.  
 그러니 우리에게 필요한 로그는? Security.evtx이다.  
 보안 로그는 이벤트 뷰어를 통해서 열어보자!  
 
-![sec]()
+![sec](https://raw.githubusercontent.com/RoomRooms/blog/master/img/Digital%20Forensic/NONamed/NONamed_Company3/sec.PNG)
 
 우리가 찾고자 하는 이벤트는 사용자 계정 삭제다.  
 이에 해당하는 이벤트 ID는 4726이다.  
 이를 이벤트 뷰어의 필터링을 이용해서 찾아보자!!
 
-![Filter]()
+![Filter](https://raw.githubusercontent.com/RoomRooms/blog/master/img/Digital%20Forensic/NONamed/NONamed_Company3/Filter.PNG)
 
 찾았다!! 여기에 계정명과 삭제 시각이 기록되어 있다.
 
-![Flag]()
+![Flag](https://raw.githubusercontent.com/RoomRooms/blog/master/img/Digital%20Forensic/NONamed/NONamed_Company3/Flag.PNG)
 
 ## 여기서부터는 [Site](https://ssol2-jjanghacker.tistory.com/entry/N0Named-B-%EC%9C%A0%EC%B6%9C%EB%90%9C-%EC%9E%90%EB%A3%8C-%EA%B1%B0%EB%9E%98-%EC%82%AC%EA%B1%B43)을 참조했다..
 
