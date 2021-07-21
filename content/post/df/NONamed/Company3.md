@@ -13,7 +13,7 @@ keywords:
 
 <!--more-->
 
-![Problem] (https://raw.githubusercontent.com/RoomRooms/blog/master/img/Digital%20Forensic/NONamed/NONamed_Company3/Problem.PNG)
+![Problem](https://raw.githubusercontent.com/RoomRooms/blog/master/img/Digital%20Forensic/NONamed/NONamed_Company3/Problem.PNG)
 
 이번 포스팅에서 해결할 문제다!!!  
 동거자의 이름과 계정 삭제된 시각을 알아내야 한다!  
