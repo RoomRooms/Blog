@@ -13,7 +13,7 @@ keywords:
 
 <!--more-->
 
-![Problem]()
+![Problem](https://raw.githubusercontent.com/RoomRooms/blog/master/img/Digital%20Forensic/NONamed/NONamed_Company2/Problem.PNG)
 
 오늘의 문제다!!  
 처음 문제를 본 순간, 아 이건 어렵다. 라는 직감이 강하게 왔다.  
@@ -30,13 +30,13 @@ USB 관련 문제다.
 위 두 정보는 NTFS Log Tracker를 통해서 알아낼 수 있다.  
 이를 위해 먼저 NTFS Log Tracker에 필요한 파일들을 추출했다.  
 
-![LogFile, MFT]()
+![LogFile, MFT](https://raw.githubusercontent.com/RoomRooms/blog/master/img/Digital%20Forensic/NONamed/NONamed_Company2/Log&mft.PNG)
 
-![J]()
+![J](https://raw.githubusercontent.com/RoomRooms/blog/master/img/Digital%20Forensic/NONamed/NONamed_Company2/J.PNG)
 
 위 세 가지 파일을 모두 추출한 다음에 NTFS Log Tracker에 넣어 분석했다.  
 
-![Log Tracker]()
+![Log Tracker](https://raw.githubusercontent.com/RoomRooms/blog/master/img/Digital%20Forensic/NONamed/NONamed_Company2/LogTracker1.PNG)
 
 문제는 로그가 너무 많다는 것이다!!  
 이것을 다 보는 것이 아니라 특정 시간대를 찾아야 한다고 생각했다.  
@@ -49,7 +49,7 @@ USB 최초 연결 시간은 레지스트리를 통해서 알 수 있다.
 하지만 해당 문제는 이미지 파일이기에 하이브 파일을 추출했다.  
 우리에게 필요한 하이브는 SYSTEM과 SOFTWARE다.  
 
-![SYS&SOFT]()
+![SYS&SOFT](https://raw.githubusercontent.com/RoomRooms/blog/master/img/Digital%20Forensic/NONamed/NONamed_Company2/sys&soft.PNG)
 
 두 하이브 파일 모두 %WINDIR%system32\config 아래에 존재한다.  
 두 파일을 추출한 후, 이를 REGA를 통해서 분석했다.  
@@ -60,13 +60,13 @@ SOFTWARE\Microsoft\Windows Portable Devices\Devices\{Device Entry}
 위 두 경로 모두 USB 최초 연결 시각을 알 수 있는 레지스트리다.  
 만일을 위해 두 개를 모두 확인했다.  
 
-![Rega]()
+![Rega](https://raw.githubusercontent.com/RoomRooms/blog/master/img/Digital%20Forensic/NONamed/NONamed_Company2/REGA.PNG)
 
 이를 통해 확인한 시각은 2020-02-20 17:38:54와 2020-02-20 17:47:41 이다.  
 두 개의 USB를 사용한 것으로 확인된다.  
 이를 메모장에 기록해두자!  
 
-![Info]()
+![Info](https://raw.githubusercontent.com/RoomRooms/blog/master/img/Digital%20Forensic/NONamed/NONamed_Company2/Info.PNG)
 
 시간은 알았다. 그럼 이 정보를 사용해서 이벤트를 확인해보자.  
 아까 분석했던 NTFS Log Tracker에 먼저 2020-02-20 17:38:54로 찾아갔다.  
@@ -74,12 +74,12 @@ SOFTWARE\Microsoft\Windows Portable Devices\Devices\{Device Entry}
 
 천천히 내려가던 중, 이름 변경 이벤트가 있었다.  
 
-![Flag]()
+![Flag](https://raw.githubusercontent.com/RoomRooms/blog/master/img/Digital%20Forensic/NONamed/NONamed_Company2/Flag.PNG)
 
 이를 보고 수상하게 생각하여 변경된 이름인 todaysmemo.hwp를 검색했다.  
 검색 결과 17:48:26에 파일을 삭제한 것을 알 수 있다.  
 
-![search]()
+![search](https://raw.githubusercontent.com/RoomRooms/blog/master/img/Digital%20Forensic/NONamed/NONamed_Company2/search.PNG)
 
 이 시간을 되새김해보면 아까 찾은 남은 하나의 USB 최초 연결시각과 1분도 차이나지 않는다.  
 추측이지만 피의자는 파일의 이름을 변경 후, 다른 하나의 USB (SAMSUNG)으로 옮긴 것 같다.  
