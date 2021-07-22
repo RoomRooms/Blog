@@ -13,28 +13,28 @@ keywords:
 
 <!--more-->
 
-![Problem]()
+![Problem](https://raw.githubusercontent.com/RoomRooms/blog/master/img/Digital%20Forensic/NONamed/NONamed_Company4/Problem.PNG)
 
 이번 포스팅에서 해결해볼 문제다!!  
 정보가 없다. 있다면 \"문서\"와 \"암호화\"라는 부분 정도?  
 이를 바탕으로 먼저 VeraCrypt가 생각나서 NTFS Log Tracker로 찾아보았다.
 
-![Log]()
+![Log](https://raw.githubusercontent.com/RoomRooms/blog/master/img/Digital%20Forensic/NONamed/NONamed_Company4/Log1.PNG)
 
 찾기는 했지만 뭐가 뭔지 파악이 힘들다.  
 무작정 이 시간대에서부터 앞 뒤로 뒤지다보니 이상한 파일들이 보인다.  
 \"plan.txt\"과 \"vc.txt\"이다.  
 plan.txt는 별다른 이상한 점을 찾지 못했다.  
 
-![log2]()
+![log2](https://raw.githubusercontent.com/RoomRooms/blog/master/img/Digital%20Forensic/NONamed/NONamed_Company4/Log2.PNG)
 
 하지만 vc.txt는 해당 파일이 쓰레기통으로 버려졌다는 것을 확인할 수 있었다.  
 
-![log3]()
+![log3](https://raw.githubusercontent.com/RoomRooms/blog/master/img/Digital%20Forensic/NONamed/NONamed_Company4/Log3.PNG)
 
 그래서 해당 파일을 찾아서 열어보았다.  
 
-![passwd]()
+![passwd](https://raw.githubusercontent.com/RoomRooms/blog/master/img/Digital%20Forensic/NONamed/NONamed_Company4/passwd.PNG)
 
 Veracrypt에서 암호화할 때 사용한 정보가 적혀있는 것으로 추정되는 파일을 찾을 수 있었다!!  
 
@@ -45,11 +45,11 @@ Veracrypt에서 암호화할 때 사용한 정보가 적혀있는 것으로 추�
 [참고](https://d0ngr0thy.tistory.com/62) 이 글을 읽고 제가 예상했던 파티션 3이 정답이였습니다.  
 이 파일을 VeraCrypt로 복호화를 시키면 볼륨이 나옵니다.
 
-![vera]()
+![vera](https://raw.githubusercontent.com/RoomRooms/blog/master/img/Digital%20Forensic/NONamed/NONamed_Company4/vera.PNG)
 
 이 볼륨 내에는 Plan.txt가 존재하며 파일 내부에 Flag가 존재합니다.  
 
-![Flag]()
+![Flag](https://raw.githubusercontent.com/RoomRooms/blog/master/img/Digital%20Forensic/NONamed/NONamed_Company4/Flag.PNG)
 
 다음부터는 힘들어도 혼자 푸는 게 마음이 편하고 행복한 것 같습니다..  
 정답을 보는 건 항상 후회되네요..  
