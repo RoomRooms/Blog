@@ -171,7 +171,7 @@ GF(p)는 크기가 p인 갈로아 체라고 한다.
 수행시간은 튜링 기계의 동작 스텝수로 나타내는 것이 일반적이다.  
 
 세상 모든 문제는 아래 처럼 구별 가능하다.
-![Picture]()
+![Picture](https://raw.githubusercontent.com/RoomRooms/blog/master/img/Crypto/Modern%20Cryptology/Weak3/problem.PNG)
 
 다항식 시간 내에 해를 구할 수 있는 문제를 쉬운 문제  
 지수 함수적 시간에 해를 구할 수 있는 문제를 어려운 문제로 분류한다.  
