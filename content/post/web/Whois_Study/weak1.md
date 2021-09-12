@@ -99,4 +99,95 @@ JWT는 기본적으로 static 변수랑 디스크에 저장됩니다.
 
 # REST API
 
+REST API를 설명하기 전에 REST를 먼저 설명해야 한다.  
+REST(Representational State Transfer)은 HTTP에 존재하는 모든 자원에 고유한 URI를 부여하여  
+구별하며 HTTP method를 이용해 해당 자원에 대한 CRUD를 적용하는 것 입니다.  
+즉, 각 자원들을 체계적으로 분류하고 Method가 반환하는 상태 코드와  
+Method의 위험 등급에 따라 분리하는 것입니다.  
+
+예를 들자면 나는 네이버의 메일의 받은 메일함 속 특정 메일을 보고싶어! 하면  
+mail.naver.com/receive_mail/Whois-Study  
+처럼 항목을 자세하게 나누는 것입니다.  
+
+Method도 자원만큼 분리를 해야하는데, 단순히 데이터를 조회만 한뿐인 GET과  
+데이터를 직접 입력하고(POST), 수정하는(PUT)이 같은 위험 등급이라면 위험할 것입니다.  
+즉, 위험 등급에 따라 분리를 하고 높은 위험 등급을 갖는 Method를 더 주의하여야 합니다.  
+
+그리고 반환값, 상태 코드 등을 그대로 반환하는 것이 아닌 상황에 맞는 응답을 주어야 합니다.  
+예를 들자면 클라이언트가 GET을 통해 에러를 발생시킨다고 가정해봅니다.  
+해커는 해당 에러값을 분석하거나 에러를 통해 해당 명제가 참인지 거짓인지 판별할 수 있습니다.  
+이를 블라인드 SQL 인젝션이라고 합니다.  
+이를 방지하기 위해서는 응답값을 그대로 반환하는 것이 아닌 응답값의 표현을 전송하는 것입니다.  
+예를 들면 User ID is MISSING from the database.라는 결과를 반환하는 것이 아닌  
+'오류가 발생하였습니다' 와 같이 실제 응답값과 클라이언트 반환값을 분리시키는 것입니다.  
+
+REST API는 REST를 기반으로 서비스 API를 만드는 것을 의미하며,  
+체계적 구조를 하나의 규칙처럼 제공하여 상호간 통신을 보다 수월하게 하도록 합니다.  
+물론 보안성도 더 좋아지겠죠.  
+
+REST API의 Method는 총 4가지로 GET, POST, PUT, DELETE입니다.  
+
+|HTTP Method|CRUD|Example|
+|:---:|:---:|:---:|
+|GET|자원 조회|SELECT a From b|
+|POST|자원 생성|CREATE Table c|
+|PUT|자원 수정|UPDATE d SET ~~ |
+|DELETE|자원 제거|DELETE Table f|
+
+자 이제, Web에 대한 지식을 배웠으니 해킹을 배워봅시다.  
+
+## los.rubiya.kr
+
+위 사이트는 다양한 Web 문제가 있는 사이트입니다.  
+오늘은 그 중 Gremlin, Cobolt, Goblin에 대해 리뷰할 것입니다.  
+
+### Gremlin
+
+![Grem](https://github.com/RoomRooms/blog/blob/master/img/Web/Whois_Study/weak1/grem.PNG?raw=true)
+
+php 코드를 보면 정규표현식을 통한 필터링 외에는 크게 보안 정책이 없는 것을 확인할 수 있습니다.  
+가장 기본적인 SQL injection인 'or 1 = 1 %23을 pw에 넣어줍니다.  
+(%23은 \#으로 URL Encoding한 값입니다.)
+
+![Grem_Fin](https://github.com/RoomRooms/blog/blob/master/img/Web/Whois_Study/weak1/grem_fin.PNG?raw=true)
+
+다음 문제는 Cobolt입니다.  
+
+![Cobolt](https://github.com/RoomRooms/blog/blob/master/img/Web/Whois_Study/weak1/col.PNG?raw=true)
+
+이번에 몇 가지 달라진 점들이 있지만 가장 중요한 부분은 아래와 같다.
+> if(\$result\['id'\] == 'admin') solve("cobolt");  
+
+id가 admin이면 앞뒤 안가리고 해결된다는 것.  
+이를 위해 id=admin'%23을 넣어주었다.  
+
+![Cobolt_Fin](https://github.com/RoomRooms/blog/blob/master/img/Web/Whois_Study/weak1/Col_fin.PNG?raw=true)
+
+위와 같이 해결된 것을 알 수 있다.  
+
+다음 문제는 Goblin입니다.  
+
+![Goblin](https://github.com/RoomRooms/blog/blob/master/img/Web/Whois_Study/weak1/goblin.PNG?raw=true)
+
+이번에는 아예 정규표현식을 강하게 규정했습니다.  
+\' 혹은 \"을 차단했네요.  
+이를 해결하기 위해서 사용하는 방식이 인코딩입니다.  
+서버에서 처리하도록 injection 값을 인코딩하여 정규표현식을 우회하는 것입니다.  
+admin이라는 값을 id에 넣어야 하기에 admin을 헥사값으로 인코딩해보겠습니다.  
+
+![hex](https://github.com/RoomRooms/blog/blob/master/img/Web/Whois_Study/weak1/hex.PNG?raw=true)
+
+61646D696E라는 값이 나옵니다. 이 값을 헥사를 뜻하는 0x를 붙인 후에 id=에 넣어주면 됩니다.  
+
+![goblin_fin](https://github.com/RoomRooms/blog/blob/master/img/Web/Whois_Study/weak1/Goblin_fin.PNG?raw=true)
+
+문제는 대충 풀어보았는데, 만일 내가 개발자라면? 이 취약점을 어떻게 막을 수 있을까를 생각해보았습니다.  
+
+Gremlin -> Cobolt -> Goblin 순으로 보안을 신경쓴만큼 Goblin을 기준으로 생각했습니다.  
+가장 처음으로 드는 생각은 인코딩한 값을 인식하지 못하도록 서버에서 인코딩값을 차단하는 것입니다.  
+하지만 이렇게 블랙리스트 방식으로는 답이 없을 것 같아서 다른 대책을 생각했습니다.  
+
+지난 2021/09/06 에 있었던 웹 해킹 강좌에서 배운 Prepared Statement를 사용한 것입니다.  
+사용자의 입력을 받는 구문을 미리 컴파일하는 것으로 의도하지 않은 조작을 방지하는 기술입니다.  
+그 외를 생각해보면 화이트리스트 방식으로 한정된 문자만을 허용하는 방식이 가장 효율적일 것 같습니다.  
 
