@@ -21,30 +21,30 @@ Whois RE Study 2주차 과제에 대해서 포스팅하려 한다.
 정확히는 PE x86 - 0 Protection이다.  
 먼저 문제를 보면 아무런 힌트없이 파일 하나를 준다.  
 
-![Problem1](https://raw.githubusercontent.com/RoomRooms/blog/master/img/Reversing/Root-Me/PE x86 - 0 Protection/Problem1.PNG)
+![Problem1](https://github.com/RoomRooms/blog/blob/master/img/Reversing/Root-Me/PE%20x86%20-%200%20Protection/Problem1.PNG?raw=true)
 
 문제에서 제공되는 파일을 x32dbg로 열어보자!  
 
-![Problem2](https://raw.githubusercontent.com/RoomRooms/blog/master/img/Reversing/Root-Me/PE x86 - 0 Protection/Problem2.PNG)
+![Problem2](https://github.com/RoomRooms/blog/blob/master/img/Reversing/Root-Me/PE%20x86%20-%200%20Protection/Problem2.PNG?raw=true)
 
 흠.. 사실 처음 열어봐서는 하나도 모르겠다.  
 일단 프로그램 작성자가 작성한 부분을 찾아야겠다.  
 이를 위해서 몇 가지 방법이 있는데 필자는 import한 함수를 통해 찾아볼 것이다.  
 
-![import](https://raw.githubusercontent.com/RoomRooms/blog/master/img/Reversing/Root-Me/PE x86 - 0 Protection/import.PNG)
+![import](https://github.com/RoomRooms/blog/blob/master/img/Reversing/Root-Me/PE%20x86%20-%200%20Protection/import.PNG?raw=true)
 
 위 버튼을 누르면 사용자가 import한 함수들을 알 수 있다.  
 이를 통해 찾아보면 puts 함수가 있는 것을 확인할 수 있는데,  
 이를 보고 사용자가 작성한 부분이라 추정하여 이를 추적해보았다.  
 
-![Find](https://raw.githubusercontent.com/RoomRooms/blog/master/img/Reversing/Root-Me/PE x86 - 0 Protection/Find.PNG)
+![Find](https://github.com/RoomRooms/blog/blob/master/img/Reversing/Root-Me/PE%20x86%20-%200%20Protection/Find.PNG?raw=true)
 
 함수 하나를 찾았다. 내용을 보니 문자를 입력받고  
 이를 비밀번호와 대조하는 역할의 함수로 추정된다.  
 Root-Me를 접속해보면 알겠지만, 이 문제에서는 비밀번호를 찾으라고 했다.  
 프로그램에서 대조하는 문자들을 정리해서 Root-Me에 입력해보니 정답임을 확인할 수 있었다.  
 
-![puts](https://raw.githubusercontent.com/RoomRooms/blog/master/img/Reversing/Root-Me/PE x86 - 0 Protection/puts.PNG)
+![puts](https://github.com/RoomRooms/blog/blob/master/img/Reversing/Root-Me/PE%20x86%20-%200%20Protection/puts.PNG?raw=true)
 
 -----
 
